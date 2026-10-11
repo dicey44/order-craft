@@ -2,6 +2,7 @@
 
 import type { Order } from "@/types/order"
 import { useState } from "react"
+import Link from "next/link"
 
 interface OrdersTableProps {
     orders: Order[]
@@ -136,8 +137,13 @@ export default function OrdersTable({orders}: OrdersTableProps) {
                                     key={order.id}
                                     className="transition-colors hover:bg-slate-50"
                                 >
-                                    <td className="whitespace-nowrap px-6 py-4 font-semibold text-blue-600">
-                                        {order.id}
+                                    <td className="whitespace-nowrap px-6 py-4 font-semibold">
+                                        <Link
+                                            href={`/orders/${order.id}`}
+                                            className="rounded text-blue-600 hover:text-blue-800 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600"
+                                        >
+                                            {order.id}
+                                        </Link>
                                     </td>
 
                                     <td className="whitespace-nowrap px-6 py-4 font-medium text-slate-700">
