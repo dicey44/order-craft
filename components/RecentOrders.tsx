@@ -23,41 +23,39 @@ export default function RecentOrders() {
 
             <ul className="divide-y divide-slate-100">
                 {recentOrders.map((obj) => (
-                    <li
-                        key={obj.id}
-                    >
-                    <Link href={`orders/${obj.id}`} className="flex flex-col gap-3 px-6 py-4 sm:flex-row sm:items-center sm:justify-between">
-                        <div>
-                            <p className="text-sm font-semibold text-slate-900">
-                                {obj.id}
-                            </p>
-                            <p className="mt-1 text-xs text-slate-500">
-                                {new Date(obj.createdAt).toLocaleDateString(
-                                    "en-US",
-                                    {
-                                        year: "numeric",
-                                        month: "short",
-                                        day: "numeric",
-                                        timeZone: "Asia/Tokyo",
-                                    }
-                                )}
-                            </p>
-                        </div>
+                    <li key={obj.id} className="transition-colors hover:bg-slate-50">
+                        <Link href={`orders/${obj.id}`} className="flex flex-col gap-3 px-6 py-4 sm:flex-row sm:items-center sm:justify-between">
+                            <div>
+                                <p className="text-sm font-semibold text-slate-900">
+                                    {obj.id}
+                                </p>
+                                <p className="mt-1 text-xs text-slate-500">
+                                    {new Date(obj.createdAt).toLocaleDateString(
+                                        "en-US",
+                                        {
+                                            year: "numeric",
+                                            month: "short",
+                                            day: "numeric",
+                                            timeZone: "Asia/Tokyo",
+                                        }
+                                    )}
+                                </p>
+                            </div>
 
-                        <span
-                            className={`inline-flex w-fit items-center rounded-full px-3 py-1 text-xs font-semibold ${
-                                obj.status === "completed"
-                                    ? "bg-green-100 text-green-700"
-                                    : obj.status === "ready_to_ship"
-                                    ? "bg-blue-100 text-blue-700"
-                                    : obj.status === "awaiting_payment"
-                                    ? "bg-amber-100 text-amber-700"
-                                    : "bg-red-100 text-red-700"
-                            }`}
-                        >
-                            {obj.status.replaceAll("_", " ")}
-                        </span>
-                    </Link>
+                            <span
+                                className={`inline-flex w-fit items-center rounded-full px-3 py-1 text-xs font-semibold ${
+                                    obj.status === "completed"
+                                        ? "bg-green-100 text-green-700"
+                                        : obj.status === "ready_to_ship"
+                                        ? "bg-blue-100 text-blue-700"
+                                        : obj.status === "awaiting_payment"
+                                        ? "bg-amber-100 text-amber-700"
+                                        : "bg-red-100 text-red-700"
+                                }`}
+                            >
+                                {obj.status.replaceAll("_", " ")}
+                            </span>
+                        </Link>
                     </li>
                     
                 ))}
