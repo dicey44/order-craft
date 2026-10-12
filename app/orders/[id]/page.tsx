@@ -1,7 +1,7 @@
 import { orders } from "@/data/orders";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import OrderStatusForm from "@/components/OrderStatusForm";
+import OrderDetailsClient from "@/components/OrderDetailsClient";
 
 export const instant = false;
 
@@ -18,7 +18,6 @@ export default async function OrderDetails({params}: OrderDetailsProps) {
     return (
         <main className="min-h-screen bg-slate-50 px-4 py-10 text-slate-900 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-5xl">
-
                 {/* Back Navigation */}
                 <Link
                     href="/orders"
@@ -27,38 +26,25 @@ export default async function OrderDetails({params}: OrderDetailsProps) {
                     <span aria-hidden="true">←</span>
                     Back to Orders
                 </Link>
-
-                {/* Order Header */}
-                <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+                <OrderDetailsClient initialStatus={myOrder.status} orderId={myOrder.id}
+                header={(
                     <div>
-                        <p className="mb-2 text-sm font-medium text-slate-500">
-                            Order Details
-                        </p>
+                        <div>
+                            <p className="mb-2 text-sm font-medium text-slate-500">
+                                Order Details
+                            </p>
 
-                        <h1 className="text-3xl font-bold tracking-tight">
-                            {myOrder.id}
-                        </h1>
+                            <h1 className="text-3xl font-bold tracking-tight">
+                                {myOrder.id}
+                            </h1>
 
-                        <p className="mt-2 text-sm text-slate-500">
-                            Customer: {myOrder.customerId}
-                        </p>
+                            <p className="mt-2 text-sm text-slate-500">
+                                Customer: {myOrder.customerId}
+                            </p>
+                        </div>
                     </div>
-
-                    <span
-                        className={`inline-flex self-start rounded-full px-4 py-2 text-sm font-semibold ring-1 ring-inset ${
-                            myOrder.status === "completed"
-                                ? "bg-emerald-50 text-emerald-700 ring-emerald-200"
-                                : myOrder.status === "ready_to_ship"
-                                ? "bg-blue-50 text-blue-700 ring-blue-200"
-                                : myOrder.status === "awaiting_payment"
-                                ? "bg-amber-50 text-amber-700 ring-amber-200"
-                                : "bg-red-50 text-red-700 ring-red-200"
-                        }`}
-                    >
-                        {myOrder.status.replaceAll("_", " ")}
-                    </span>
-                </div>
-
+                )}
+                >
                 {/* Order Summary */}
                 <section
                     aria-labelledby="order-summary-heading"
@@ -165,8 +151,7 @@ export default async function OrderDetails({params}: OrderDetailsProps) {
                         </span>
                     </div>
                 </section>
-                {/* OrderStatusForm */}
-                <OrderStatusForm orderId={myOrder.id} currentStatus={myOrder.status} />
+                </OrderDetailsClient>
             </div>
         </main>
     );

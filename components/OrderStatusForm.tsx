@@ -1,19 +1,20 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation";
+
 
 interface OrderStatusFormProps {
     orderId: string;
     currentStatus: string;
+    onStatusUpdated: (newStatus: string) => void;
 }
 
-export default function OrderStatusForm({orderId, currentStatus}: OrderStatusFormProps) {
+export default function OrderStatusForm({orderId, currentStatus, onStatusUpdated}: OrderStatusFormProps) {
     const [status, setStatus] = useState(currentStatus);
     const [message, setMessage] = useState("");
     const [isSaving, setIsSaving] = useState(false)
 
-    const router = useRouter();
+    
 
     async function handleSave() {
         setIsSaving(true)
@@ -31,8 +32,9 @@ export default function OrderStatusForm({orderId, currentStatus}: OrderStatusFor
                 }
             )
             if (response.ok) {
+                onStatusUpdated(status)
                 setMessage("Order status updated successfully!")
-                router.refresh()
+                
             } else {
                 setMessage("Failed to update order status.")
             }
@@ -43,6 +45,7 @@ export default function OrderStatusForm({orderId, currentStatus}: OrderStatusFor
 
         } finally {
             setIsSaving(false)
+            
         }
         
     }
