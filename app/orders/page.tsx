@@ -25,6 +25,7 @@ export default function OrdersPage() {
 
                 {/* Orders Table */}
                 <OrdersTable orders={orders} />
+                
             </div>
         </main>
     );
