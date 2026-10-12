@@ -1,7 +1,11 @@
-import { orders } from "@/data/orders";
+"use client"
+
+import { useOrders } from "@/context/OrdersContext";
 import Link from "next/link";
 
 export default function RecentOrders() {
+    const { orders } = useOrders();
+
     const recentOrders = [...orders].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).slice(0, 3);
 
     return (

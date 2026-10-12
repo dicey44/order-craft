@@ -24,7 +24,7 @@ export default function OrdersPage() {
                 </div>
 
                 {/* Orders Table */}
-                <OrdersTable orders={orders} />
+                <OrdersTable />
                 
             </div>
         </main>

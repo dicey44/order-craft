@@ -1,6 +1,11 @@
-import { orders } from "@/data/orders";
+"use client"
+
+import { useOrders } from "@/context/OrdersContext";
 
 export default function OrderOverview() {
+
+    const { orders } = useOrders();
+    console.log("Dashboard orders:", orders);
 
     const totalOrders = orders.length;
     const completedOrders = orders.filter(order => order.status === "completed").length;

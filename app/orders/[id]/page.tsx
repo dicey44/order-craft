@@ -26,24 +26,27 @@ export default async function OrderDetails({params}: OrderDetailsProps) {
                     <span aria-hidden="true">←</span>
                     Back to Orders
                 </Link>
-                <OrderDetailsClient initialStatus={myOrder.status} orderId={myOrder.id}
-                header={(
-                    <div>
+                <OrderDetailsClient
+                    initialStatus={myOrder.status}
+                    initialUpdatedAt={myOrder.updatedAt}
+                    orderId={myOrder.id}
+                    header={(
                         <div>
-                            <p className="mb-2 text-sm font-medium text-slate-500">
-                                Order Details
-                            </p>
+                            <div>
+                                <p className="mb-2 text-sm font-medium text-slate-500">
+                                    Order Details
+                                </p>
 
-                            <h1 className="text-3xl font-bold tracking-tight">
-                                {myOrder.id}
-                            </h1>
+                                <h1 className="text-3xl font-bold tracking-tight">
+                                    {myOrder.id}
+                                </h1>
 
-                            <p className="mt-2 text-sm text-slate-500">
-                                Customer: {myOrder.customerId}
-                            </p>
+                                <p className="mt-2 text-sm text-slate-500">
+                                    Customer: {myOrder.customerId}
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
                 >
                 {/* Order Summary */}
                 <section
@@ -73,15 +76,7 @@ export default async function OrderDetails({params}: OrderDetailsProps) {
                             </p>
                         </div>
 
-                        <div>
-                            <p className="text-sm text-slate-500">Last Updated</p>
-                            <p className="mt-1 font-semibold">
-                                {new Date(myOrder.updatedAt).toLocaleDateString(
-                                    "ja-JP",
-                                    { timeZone: "Asia/Tokyo" }
-                                )}
-                            </p>
-                        </div>
+                        
                     </div>
                 </section>
 

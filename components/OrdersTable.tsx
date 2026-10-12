@@ -1,14 +1,12 @@
-"use client"
+"use client";
 
-import type { Order } from "@/types/order"
-import { useState } from "react"
-import Link from "next/link"
+import { useState } from "react";
+import Link from "next/link";
+import { useOrders } from "@/context/OrdersContext";
 
-interface OrdersTableProps {
-    orders: Order[]
-}
+export default function OrdersTable() {
+    const { orders } = useOrders();
 
-export default function OrdersTable({orders}: OrdersTableProps) {
     const [searchQuery, setSearchQuery] = useState("");
     const [statusFilter, setStatusFilter] = useState("all");
 
