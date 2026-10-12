@@ -1,6 +1,9 @@
 import { orders } from "@/data/orders";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import OrderStatusForm from "@/components/OrderStatusForm";
+
+export const instant = false;
 
 interface OrderDetailsProps {
     params: Promise<{ id: string }>
@@ -99,7 +102,7 @@ export default async function OrderDetails({params}: OrderDetailsProps) {
                 {/* Order Items */}
                 <section
                     aria-labelledby="order-items-heading"
-                    className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm"
+                    className="mb-8 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm"
                 >
                     <div className="border-b border-slate-200 px-6 py-5">
                         <h2
@@ -162,6 +165,8 @@ export default async function OrderDetails({params}: OrderDetailsProps) {
                         </span>
                     </div>
                 </section>
+                {/* OrderStatusForm */}
+                <OrderStatusForm orderId={myOrder.id} currentStatus={myOrder.status} />
             </div>
         </main>
     );
