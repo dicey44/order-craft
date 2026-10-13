@@ -1,7 +1,11 @@
-import { orders } from "@/data/orders";
+"use client"
+
+import { useOrders } from "@/context/OrdersContext";
 import OrdersTable from "@/components/OrdersTable";
 
 export default function OrdersPage() {
+
+    const { orders } = useOrders()
 
     return (
         <main className="min-h-screen bg-slate-50 px-4 py-10 text-slate-900 sm:px-6 lg:px-8">

@@ -18,6 +18,7 @@ interface OrdersContextType {
     orders: Order[];
     updateOrderStatus: (orderId: string, newStatus: OrderStatus) => void;
     addOrder: (newOrder: Order) => void;
+    removeOrder: (orderId: string) => void;
     isLoaded: boolean;
 }
 
@@ -81,8 +82,12 @@ export function OrdersProvider({ children }: { children: ReactNode }) {
         setOrders(prevOrders => [...prevOrders, newOrder])
     }
 
+    function removeOrder(orderId: string) {
+        setOrders(prevOrders => prevOrders.filter(order => order.id !== orderId))
+    }
+
     return (
-        <OrdersContext.Provider value={{ orders, updateOrderStatus, addOrder, isLoaded }}>
+        <OrdersContext.Provider value={{ orders, updateOrderStatus, addOrder, isLoaded, removeOrder }}>
             {children}
         </OrdersContext.Provider>
     );

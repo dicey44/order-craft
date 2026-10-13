@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useOrders } from "@/context/OrdersContext";
 
 
 interface OrderStatusFormProps {
@@ -12,7 +13,7 @@ interface OrderStatusFormProps {
 export default function OrderStatusForm({orderId, currentStatus, onStatusUpdated}: OrderStatusFormProps) {
     const [status, setStatus] = useState(currentStatus);
     const [message, setMessage] = useState("");
-
+    const { removeOrder } = useOrders();
     
 
     function handleSave() {
@@ -78,6 +79,26 @@ export default function OrderStatusForm({orderId, currentStatus, onStatusUpdated
                     {message}
                 </p>
             )}
+            <div className="mt-6 border-t border-slate-200 pt-6">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                        <h3 className="text-sm font-semibold text-slate-900">
+                            Delete Order
+                        </h3>
+                        <p className="mt-1 text-sm text-slate-500">
+                            Permanently remove this order from the system.
+                        </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        onClick={() => removeOrder(orderId)}
+                        className="inline-flex items-center justify-center rounded-lg border border-red-200 bg-red-50 px-5 py-2.5 text-sm font-semibold text-red-700 transition-colors hover:border-red-300 hover:bg-red-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                    >
+                        Delete Order
+                    </button>
+                </div>
+            </div>
         </section>
     );
 }
