@@ -3,12 +3,14 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useOrders } from "@/context/OrdersContext";
+import CreateOrderModal from "./CreateOrderModal";
 
 export default function OrdersTable() {
     const { orders } = useOrders();
 
     const [searchQuery, setSearchQuery] = useState("");
     const [statusFilter, setStatusFilter] = useState("all");
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const trimmedQuery = searchQuery.trim().toLowerCase();
     const filteredOrders = orders.filter(order => {
@@ -39,6 +41,14 @@ export default function OrdersTable() {
 
     return (
         <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+            <button
+                type="button"
+                onClick={() => setIsModalOpen(true)}
+                className="rounded-lg bg-blue-600 ml-6 mt-6 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+            >
+                Create Order
+            </button>
+            {isModalOpen && <CreateOrderModal onClose={() => setIsModalOpen(false)}/>}
             {/* Search and Filter Controls */}
             <div className="flex flex-col gap-4 border-b border-slate-200 bg-white px-6 py-5 sm:flex-row sm:items-end">
 

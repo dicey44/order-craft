@@ -1,19 +1,34 @@
-import { orders } from "@/data/orders";
-import { notFound } from "next/navigation";
+"use client"
+
+import { useOrders } from "@/context/OrdersContext";
 import Link from "next/link";
 import OrderDetailsClient from "@/components/OrderDetailsClient";
+import { useParams } from "next/navigation";
+import { Suspense } from "react";
 
-export const instant = false;
+function OrderDetailsContent() {
+    const { orders, isLoaded } = useOrders();
+    const { id } = useParams<{ id: string }>();
 
-interface OrderDetailsProps {
-    params: Promise<{ id: string }>
-}
+    const myOrder = orders.find(
+        (order) => order.id.toLowerCase() === id.toLowerCase()
+    );
 
-export default async function OrderDetails({params}: OrderDetailsProps) {
-    const { id } = await params;
-    const myOrder = orders.find(obj => obj.id.toLowerCase() === id.toLowerCase());
+    if (!isLoaded) {
+        return (
+            <main className="p-10 text-center text-slate-500">
+                Loading order details...
+            </main>
+        );
+    }
+
     if (!myOrder) {
-        notFound()
+        return (
+            <main className="p-10 text-center">
+                <h1 className="text-2xl font-bold">Order not found</h1>
+                <Link href="/orders">Back to Orders</Link>
+            </main>
+        );
     }
     return (
         <main className="min-h-screen bg-slate-50 px-4 py-10 text-slate-900 sm:px-6 lg:px-8">
@@ -149,5 +164,19 @@ export default async function OrderDetails({params}: OrderDetailsProps) {
                 </OrderDetailsClient>
             </div>
         </main>
+    );
+}
+
+export default function OrderDetails() {
+    return (
+        <Suspense
+            fallback={
+                <main className="min-h-screen bg-slate-50 p-10 text-center text-slate-500">
+                    Loading order details...
+                </main>
+            }
+        >
+            <OrderDetailsContent />
+        </Suspense>
     );
 }

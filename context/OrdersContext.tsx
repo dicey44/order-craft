@@ -17,6 +17,8 @@ type OrderStatus = Order["status"];
 interface OrdersContextType {
     orders: Order[];
     updateOrderStatus: (orderId: string, newStatus: OrderStatus) => void;
+    addOrder: (newOrder: Order) => void;
+    isLoaded: boolean;
 }
 
 const OrdersContext = createContext<OrdersContextType | undefined>(undefined);
@@ -75,8 +77,12 @@ export function OrdersProvider({ children }: { children: ReactNode }) {
         );
     }
 
+    function addOrder(newOrder: Order) {
+        setOrders(prevOrders => [...prevOrders, newOrder])
+    }
+
     return (
-        <OrdersContext.Provider value={{ orders, updateOrderStatus }}>
+        <OrdersContext.Provider value={{ orders, updateOrderStatus, addOrder, isLoaded }}>
             {children}
         </OrdersContext.Provider>
     );
