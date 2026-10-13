@@ -1,36 +1,132 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# OrderCraft - 受注管理Webアプリケーション
 
-## Getting Started
+OrderCraftは、企業の受注管理業務を想定して開発したWebアプリケーションです。
 
-First, run the development server:
+Next.js、React、TypeScriptを使用し、注文の一覧表示、検索、ステータス管理、新規注文の作成など、受注管理に必要な基本機能を実装しました。
+
+実際の業務システムを意識し、操作性やデータの一貫性、再利用しやすいコンポーネント設計を重視しています。
+
+## スクリーンショット
+
+<!-- ここにダッシュボードのスクリーンショットを追加 -->
+
+<!-- ここに注文一覧・注文詳細画面のスクリーンショットを追加 -->
+
+## 主な機能
+
+### ダッシュボード
+- 注文データをもとにした統計情報の表示
+- 売上金額や注文状況の確認
+- 最近の注文を一覧表示
+- 注文データの変更を画面に反映
+
+### 注文一覧
+- 注文データの一覧表示
+- キーワードによる検索
+- 注文ステータスによる絞り込み
+- 注文詳細ページへの遷移
+
+### 注文詳細
+- 顧客情報・注文日時・商品情報の表示
+- 商品ごとの数量、単価、小計の表示
+- 注文合計金額の表示
+- 注文ステータスの変更
+- 注文の削除
+
+### 新規注文作成
+- モーダルフォームからの新規注文登録
+- 顧客ID、商品ID、商品名、数量、単価の入力
+- 数量と単価に応じた合計金額の自動計算
+- HTMLフォームの標準バリデーション
+- 新規注文の一覧・詳細画面への反映
+
+### データの永続化
+- React Context APIによる注文データの共有
+- localStorageによるブラウザ内へのデータ保存
+- ページを再読み込みしても注文データや変更内容を保持
+
+## 使用技術
+
+| 分類 | 技術 |
+|---|---|
+| フレームワーク | Next.js（App Router） |
+| フロントエンド | React |
+| 言語 | TypeScript |
+| スタイリング | Tailwind CSS |
+| 状態管理 | React Context API |
+| データ保存 | localStorage |
+| アイコン | Lucide React |
+| 開発環境 | Node.js、npm |
+| バージョン管理 | Git / GitHub |
+
+## 工夫した点
+
+### 1. コンポーネント間での状態共有
+
+注文一覧、ダッシュボード、注文詳細画面など、複数のコンポーネントで同じ注文データを使用するため、React Context APIを採用しました。
+
+注文の追加・削除・ステータス変更を共通の状態管理にまとめることで、画面間でデータの不整合が発生しにくい構成を目指しました。
+
+### 2. TypeScriptによる型安全性
+
+注文情報と商品情報をそれぞれ型定義し、データ構造を明確にしました。
+
+特に注文ステータスはUnion型で管理し、想定外の値を扱うリスクを減らしています。
+
+### 3. データの永続化
+
+注文情報をlocalStorageに保存することで、ブラウザを再読み込みした場合でもデータを維持できるようにしました。
+
+また、保存データの読み込みが完了する前に注文詳細ページで「注文が見つかりません」と表示される問題に対応し、読み込み状態を考慮した画面表示を実装しました。
+
+### 4. 業務アプリケーションを意識したUI
+
+検索やステータスの絞り込み、注文詳細の確認など、日常的な受注管理業務を想定して画面を設計しました。
+
+Tailwind CSSを使用し、統一感のあるレイアウトやステータスごとの色分け、レスポンシブ対応を意識しています。
+
+## データ管理について
+
+本アプリケーションは、フロントエンドの実装学習とポートフォリオ制作を目的としたデモアプリケーションです。
+
+初期データにはモックデータを使用し、ユーザーによる注文の追加・変更・削除はReact Context APIとlocalStorageで管理しています。
+
+実際のデータベースやユーザー認証機能は実装していないため、データはブラウザごとに保存され、複数ユーザー間で共有されません。
+
+## ローカル環境での実行方法
+
+**1. リポジトリをクローン**
+
+```bash
+git clone <リポジトリURL>
+cd <プロジェクトフォルダ名>
+```
+
+**2. 依存パッケージをインストール**
+
+```bash
+npm install
+```
+
+**3. 開発サーバーを起動**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**4. ブラウザでアクセス**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 今後の改善案
 
-## Learn More
+- 1つの注文に複数の商品を登録する機能
+- 注文一覧のソート・ページネーション
+- Vitest / React Testing Libraryによる自動テスト
+- データベースと連携した永続的なデータ管理
 
-To learn more about Next.js, take a look at the following resources:
+## 制作者
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+React、TypeScript、Next.jsを中心にフロントエンド開発を学習しています。
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+本プロジェクトでは、単に画面を作成するだけでなく、業務フローを考慮した機能設計や状態管理、データの整合性について理解を深めることを目的としました。
