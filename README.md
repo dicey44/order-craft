@@ -1,3 +1,13 @@
+### Overview (English)
+
+OrderCraft is a business-oriented order management web application built with Next.js, React, and TypeScript.
+
+Designed to simulate an internal business system, the application allows users to create, search, filter, update, and delete orders through a responsive interface. It features a dashboard with order statistics, shared state management using React Context API, and browser-based data persistence with localStorage.
+
+The project emphasizes reusable components, type safety, consistent state management, and practical business workflows. Automated unit and component tests are implemented using Vitest and React Testing Library.
+
+*This is a portfolio demonstration project using mock data. It does not include a production database or user authentication.*
+
 # OrderCraft - 受注管理Webアプリケーション
 
 OrderCraftは、企業の受注管理業務を想定して開発したWebアプリケーションです。
