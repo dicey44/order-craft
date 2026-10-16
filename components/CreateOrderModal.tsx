@@ -5,6 +5,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import { X } from "lucide-react";
 import type { Order } from "@/types/order";
 import { useOrders } from "@/context/OrdersContext";
+import calculateOrderTotal from "@/utils/calculateOrderTotal";
 
 interface CreateOrderModalProps {
     onClose: () => void;
@@ -49,7 +50,7 @@ export default function CreateOrderModal({ onClose }: CreateOrderModalProps) {
                     priceAtPurchase: priceAtPurchase,
                 },
             ],
-            totalAmount: quantity * priceAtPurchase,
+            totalAmount: calculateOrderTotal(quantity, priceAtPurchase),
             status: "awaiting_payment",
             createdAt: now,
             updatedAt: now,
