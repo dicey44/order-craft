@@ -18,13 +18,28 @@ export default function CreateOrderModal({ onClose }: CreateOrderModalProps) {
     const [priceAtPurchase, setPriceAtPurchase] = useState(0);
     const {orders, addOrder} = useOrders();
 
+    function generateOrderId(): string {
+        if (orders.length >= 999) {
+                throw new Error("Maximum number of orders reached. Cannot generate a new order ID.");
+        }
+        const existingIds = new Set(orders.map(order => order.id));
+        let newId: string;
+
+        do {
+            newId = `ORD-${Math.floor(Math.random() * 999) + 1}`;
+            
+        } while (existingIds.has(newId));
+
+        return newId;
+    }
+
     function handleCreateOrder(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
         const now = new Date().toISOString();
 
         const newOrder: Order = {
-            id: "ORD-" + (orders.length + 1),
+            id: generateOrderId(),
             customerId: "CST-" + customerId.trim(),
             items: [
                 {
@@ -39,9 +54,10 @@ export default function CreateOrderModal({ onClose }: CreateOrderModalProps) {
             createdAt: now,
             updatedAt: now,
         };
-        console.log(newOrder);
+
         addOrder(newOrder)
-        console.log(orders)
+        onClose();
+        
         }
 
     useEffect(() => {
@@ -104,11 +120,13 @@ export default function CreateOrderModal({ onClose }: CreateOrderModalProps) {
                             </label>
                             <input
                                 id="customerId"
-                                type="text"
+                                type="number"
+                                max={999}
+                                min={1}
                                 required
                                 value={customerId}
                                 onChange={(e) => setCustomerId(e.target.value)}
-                                placeholder="e.g. CUST-001"
+                                placeholder="e.g. 123"
                                 autoComplete="off"
                                 className="w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm outline-none transition-colors placeholder:text-slate-400 hover:border-slate-400 focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500/20"
                             />
@@ -120,11 +138,13 @@ export default function CreateOrderModal({ onClose }: CreateOrderModalProps) {
                             </label>
                             <input
                                 id="productId"
-                                type="text"
+                                type="number"
+                                max={999}
+                                min={1}
                                 required
                                 value={productId}
                                 onChange={(e) => setProductId(e.target.value)}
-                                placeholder="e.g. I-782"
+                                placeholder="e.g. 123"
                                 autoComplete="off"
                                 className="w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm outline-none transition-colors placeholder:text-slate-400 hover:border-slate-400 focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500/20"
                             />

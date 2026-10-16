@@ -2,7 +2,7 @@ import type { Order } from "@/types/order";
 
 export const orders: Order[] = [
     {
-        id: "ORD-1",
+        id: "ORD-211",
         customerId: "CST-1",
         items: [
             {
@@ -26,7 +26,7 @@ export const orders: Order[] = [
         updatedAt: "2026-09-25T13:35:00Z",
     },
     {
-        id: "ORD-2",
+        id: "ORD-12",
         customerId: "CST-2",
         items: [
             {
@@ -42,7 +42,7 @@ export const orders: Order[] = [
         updatedAt: "2026-09-17T18:10:00Z",
     },
     {
-        id: "ORD-3",
+        id: "ORD-43",
         customerId: "CST-3",
         items: [
             {
@@ -70,7 +70,7 @@ export const orders: Order[] = [
         updatedAt: "2026-10-09T18:10:00Z",
     },
     {
-        id: "ORD-4",
+        id: "ORD-64",
         customerId: "CST-1",
         items: [
             {
@@ -86,7 +86,7 @@ export const orders: Order[] = [
         updatedAt: "2026-09-20T15:14:00Z",
     },
     {
-        id: "ORD-5",
+        id: "ORD-55",
         customerId: "CST-4",
         items: [
             {
