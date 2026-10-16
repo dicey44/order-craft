@@ -64,21 +64,18 @@ export default function OrderStatusForm({orderId, currentStatus, onStatusUpdated
                 >
                     Save Status                
                 </button>
+                
             </div>
-
-            {message && (
-                <p
+            { message && (
+                <p 
                     role="status"
                     aria-live="polite"
-                    className={`mt-4 rounded-lg px-4 py-3 text-sm ${
-                        message === "Order status updated successfully!"
-                            ? "bg-green-50 text-green-700"
-                            : "bg-red-50 text-red-700"
-                    }`}
+                    className="mt-4 rounded-lg bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700 ring-1 ring-inset ring-emerald-200"
                 >
                     {message}
                 </p>
             )}
+            
             <div className="mt-6 border-t border-slate-200 pt-6">
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div>

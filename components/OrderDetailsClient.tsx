@@ -79,7 +79,6 @@ export default function OrderDetailsClient({
             {children}
 
             <OrderStatusForm
-                key={status}
                 orderId={orderId}
                 currentStatus={status}
                 onStatusUpdated={handleStatusUpdated}
